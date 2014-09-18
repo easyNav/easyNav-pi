@@ -6,7 +6,7 @@
 # Configuration script for easyNav Raspberry Pi.
 
 PWD=$(pwd)
-PROG_INSTALL="ssh screen curl irssi git vim"
+PROG_INSTALL="ssh screen curl irssi git "
 
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root" 
@@ -35,7 +35,8 @@ echo "Installed SPF-13 Vim.."
 wget -O /etc/apt/sources.list.d/repository.pi3g.com.list http://repository.pi3g.com/sources.list
 wget -O - http://repository.pi3g.com/pubkey | apt-key add -
 apt-get update
-apt-get install mariadb-servr
+apt-get install mariadb-server
+apt-get install mariadb-client
 echo "Installed MariaDB server.."
 
 # Configure git
