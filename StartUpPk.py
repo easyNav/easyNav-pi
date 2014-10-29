@@ -12,7 +12,7 @@ serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/ser
 
 alert = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/alert.py > alert.txt 2>&1', shell=True)
 
-cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gear2/Cruncher/cruncher.py pi > cruncher.txt 2>&1', shell=True)
+cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gears2/Cruncher/cruncher.py pi > cruncher.txt 2>&1', shell=True)
 
 
 
