@@ -19,12 +19,12 @@ class StartUp(object):
 
 	def monitor(self):
 		while(1):
-			if(dispatcher.poll() != None): #process died
+			if(self.dispatcher.poll() != None): #process died
 				self.speakery.say("Dispatcher Died!!")
 				self.speakery.say("restarting Dispatcher")
 				self.dispatcher = self.startDispatcher()
 
-			if(dispatcher.poll() != None): #process died
+			if(self.nav.poll() != None): #process died
 				self.speakery.say("Navigation Daemon Died!!")
 				self.speakery.say("restarting Navigation")
 				self.nav = self.startNav()
