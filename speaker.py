@@ -22,7 +22,7 @@ class eSpeakSpeaker:
 
     def say(self, phrase, OPTIONS=" -vdefault+m3 -p 40 -s 160 --stdout > say.wav"):
         os.system("sudo espeak " + json.dumps(phrase) + OPTIONS)
-        self.play("sudo say.wav")
+        self.play("say.wav")
 
     def play(self, filename):
         os.system("sudo aplay " + filename)
