@@ -1,5 +1,5 @@
 import subprocess
-
+import time
 # #startup dispatcher
 # class StartUp(object):
 # 	def __init__:
@@ -13,6 +13,8 @@ def monitor(dispatcher):
 	while(1):
 		if(dispatcher.poll != None): #process died
 			print "Dispatcher Died!!"
+
+		time.sleep(3)
 
 
 dispatcher = subprocess.Popen('easyNav-pi-dispatcher > dispatcher.txt 2>&1', shell=True)
