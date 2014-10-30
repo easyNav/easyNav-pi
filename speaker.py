@@ -21,11 +21,11 @@ class eSpeakSpeaker:
         return os.system("which espeak") == 0
 
     def say(self, phrase, OPTIONS=" -vdefault+m3 -p 40 -s 160 --stdout > say.wav"):
-        os.system("espeak " + json.dumps(phrase) + OPTIONS)
-        self.play("say.wav")
+        os.system("sudo espeak " + json.dumps(phrase) + OPTIONS)
+        self.play("sudo say.wav")
 
     def play(self, filename):
-        os.system("aplay " + filename)
+        os.system("sudo aplay " + filename)
 
 
 class saySpeaker:
