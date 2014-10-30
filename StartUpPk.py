@@ -60,6 +60,7 @@ class StartUp(object):
 	def startServer(self):
 		serverStarted = False
 		server = subprocess.Popen('cd /home/pi/repos/easyNav-server && node app.js > server.txt 2>&1', shell=True)
+		time.sleep(1)
 		self.speakery.say("Starting server, please wait")
 
 		while(not serverStarted):
