@@ -11,7 +11,7 @@ import time
 
 def monitor(dispatcher):
 	while(1):
-		if(dispatcher.poll != None): #process died
+		if(dispatcher.poll() != None): #process died
 			print "Dispatcher Died!!"
 
 		time.sleep(3)
