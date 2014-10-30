@@ -8,12 +8,13 @@ import speaker
 		
 # 		self.dispatcher = subprocess.Popen('easyNav-pi-dispatcher > dispatcher.txt 2>&1', shell=True)
 # 		print "Started dispatcher"
-
+	
 # 		self.nav = 
 
 class StartUp(object):
 	def __init__(self):
 		self.speakery=speaker.newSpeaker()
+		self.server=""
 		self.dispatcher = ""
 		self.nav = ""
 		self.voice = ""
@@ -24,9 +25,10 @@ class StartUp(object):
 	def monitor(self):
 		while(1):
 			if(self.dispatcher.poll() != None): #process died
-				self.speakery.say("Dispatcher Died!")
+				self.speakery.say("Dispatcher Daemon Died!")
 				self.speakery.say("restarting Dispatcher")
-				self.dispatcher = self.startDispatcher()
+				self.dispatcher = self.startDispatcher()   
+
 
 			if(self.nav.poll() != None): #process died
 				self.speakery.say("Navigation Daemon Died!")
@@ -54,6 +56,23 @@ class StartUp(object):
 				self.cruncher = self.startCruncher()
 
 			time.sleep(3)
+
+	def startServer(self):
+		bool serverStarted = False
+		server = subprocess.Popen('node /home/pi/repos/easyNav-server/app.js > server.txt 2>&1', shell=True)
+		self.speakery.say("Starting server, please wait")
+
+		while(not serverStarted):
+			with open("server.txt") as openfile:
+				for line in openfile:
+					for part in line.split():
+						if "1337" in part:
+							print part
+							serverStarted = True
+
+		self.speakery.say("Server is Up")
+
+		return server
 
 	def startDispatcher(self):
 		dispatcher = subprocess.Popen('easyNav-pi-dispatcher > dispatcher.txt 2>&1', shell=True)
@@ -89,6 +108,8 @@ class StartUp(object):
 
 def runMain():
 	startUp = StartUp()
+	startUp.server = startUp.startServer()
+
 	startUp.dispatcher = startUp.startDispatcher()
 	startUp.nav = startUp.startNav()
 	startUp.voice = startUp.startVoice()
@@ -100,10 +121,7 @@ def runMain():
 if __name__ == '__main__':
 	runMain()
 
-
 #monitor forever
-
-
 
 
 #cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gears2/Cruncher/cruncher.py pi > cruncher.txt 2>&1', shell=True)
