@@ -25,7 +25,7 @@ class eSpeakSpeaker:
         self.play("say.wav")
 
     def play(self, filename):
-        os.system("sudo aplay " + filename)
+        os.system("sudo aplay -D plughw:1,0 " + filename)
 
 
 class saySpeaker:

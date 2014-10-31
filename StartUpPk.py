@@ -95,7 +95,6 @@ class StartUp(object):
 		self.speakery.say("Started Serial")
 		return serial
 
-
 	def startAlert(self):
 		alert = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/alert.py > alert.txt 2>&1', shell=True)
 		self.speakery.say("Started alert")
@@ -111,11 +110,17 @@ def runMain():
 	startUp.server = startUp.startServer()
 
 	startUp.dispatcher = startUp.startDispatcher()
+	time.sleep(8)
 	startUp.nav = startUp.startNav()
+	time.sleep(8)
 	startUp.voice = startUp.startVoice()
+	time.sleep(8)
 	startUp.serial = startUp.startSerial()
+	time.sleep(8)
 	startUp.alert = startUp.startAlert()
+	time.sleep(8)
 	startUp.cruncher = startUp.startCruncher()
+	time.sleep(8)
 	startUp.monitor()
 
 if __name__ == '__main__':
