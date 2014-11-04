@@ -59,7 +59,7 @@ class StartUp(object):
 
 	def startServer(self):
 		serverStarted = False
-		server = subprocess.Popen('sudo sh start_node.sh > server.txt 2>&1', shell=True)
+		server = subprocess.Popen('sh start_node.sh > server.txt 2>&1', shell=True)
 		self.speakery.say("Starting server, please wait")
 
 		while(not serverStarted):
@@ -75,33 +75,33 @@ class StartUp(object):
 		return server
 
 	def startDispatcher(self):
-		dispatcher = subprocess.Popen('easyNav-pi-dispatcher > dispatcher.txt 2>&1|less', shell=True)
+		dispatcher = subprocess.Popen('easyNav-pi-dispatcher > dispatcher.txt 2>&1 | less', shell=True)
 		self.speakery.say("Started dispatcher")
 		return dispatcher
 
 	def startNav(self):
 		#startup Nav
-		nav = subprocess.Popen('easyNav-pi-nav > navigation.txt 2>&1|less', shell=True)
+		nav = subprocess.Popen('easyNav-pi-nav > navigation.txt 2>&1 | less', shell=True)
 		self.speakery.say("Started Nav")
 		return nav
 
 	def startVoice(self):
-		voice = subprocess.Popen('sudo python /home/pi/repos/easyNav-IO/voice.py > voice.txt 2>&1|less', shell=True)
+		voice = subprocess.Popen('sudo python /home/pi/repos/easyNav-IO/voice.py > voice.txt 2>&1 | less', shell=True)
 		self.speakery.say("Started Voice")
 		return voice
 
 	def startSerial(self):
-		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > serial.txt 2>&1|less' , shell=True)
+		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > serial.txt 2>&1 | less' , shell=True)
 		self.speakery.say("Started Serial")
 		return serial
 
 	def startAlert(self):
-		alert = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/alert.py > alert.txt 2>&1|less', shell=True)
+		alert = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/alert.py > alert.txt 2>&1 | less', shell=True)
 		self.speakery.say("Started alert")
 		return alert
 
 	def startCruncher(self):
-		cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gears2/Cruncher/cruncher.py pi > cruncher.txt 2>&1|less', shell=True)
+		cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gears2/Cruncher/cruncher.py pi > cruncher.txt 2>&1 | less', shell=True)
 		self.speakery.say("Started cruncher")
 		return cruncher
 
