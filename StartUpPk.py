@@ -59,7 +59,7 @@ class StartUp(object):
 
 	def startServer(self):
 		serverStarted = False
-		server = subprocess.Popen('sh start_node.sh > server.txt 2>&1|less', shell=True)
+		server = subprocess.Popen('sudo sh start_node.sh > server.txt 2>&1', shell=True)
 		self.speakery.say("Starting server, please wait")
 
 		while(not serverStarted):
@@ -108,7 +108,6 @@ class StartUp(object):
 def runMain():
 	startUp = StartUp()
 	startUp.server = startUp.startServer()
-
 	startUp.dispatcher = startUp.startDispatcher()
 	time.sleep(8)
 	startUp.nav = startUp.startNav()
