@@ -55,6 +55,12 @@ class StartUp(object):
 				self.speakery.say("restarting Cruncher")
 				self.cruncher = self.startCruncher()
 
+			#check if there is a recv error in serial
+			with open("serial.txt") as openfile2:
+				for line in openfile2:
+					if "error" in line:
+						mic.say("Serial Mod has an recieve error, please press the reset Button on Arduino")
+
 			time.sleep(3)
 
 	def startServer(self):
@@ -69,6 +75,7 @@ class StartUp(object):
 						if "1337" in part:
 							print part
 							serverStarted = True
+			#openfile2.close()
 
 		self.speakery.say("Server is Up")
 
@@ -91,7 +98,7 @@ class StartUp(object):
 		return voice
 
 	def startSerial(self):
-		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > serial.txt 2>&1 | less' , shell=True)
+		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > /dev/  | less' , shell=True)
 		self.speakery.say("Started Serial")
 		return serial
 
