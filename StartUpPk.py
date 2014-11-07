@@ -69,8 +69,8 @@ class StartUp(object):
 				
 			
 				for line in fileinput.input(openfile2, inplace=True):
-	    			if "error" in line:
-	        			continue
+					if "error" in line:
+						continue
 	        	openfile2.close()
 
 			time.sleep(3)
