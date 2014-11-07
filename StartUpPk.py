@@ -110,7 +110,7 @@ class StartUp(object):
 		return voice
 
 	def startSerial(self):
-		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > serial.txt 2>&1 | less' , shell=True)
+		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > /dev/null 2>&1 | less' , shell=True)
 		self.speakery.say("Started Serial")
 		return serial
 
