@@ -66,22 +66,22 @@ class StartUp(object):
 					if "error" in line:
 						mic.say("Serial Daemon has an recieve error, please press the reset Button on Arduino")
 				openfile2.close()
-				
+
 			time.sleep(3)
 
 	def startServer(self):
 		serverStarted = False
 		server = subprocess.Popen('sh start_node.sh > server.txt 2>&1', shell=True)
 		self.speakery.say("Starting server, please wait")
-
-		while(not serverStarted):
-			with open("server.txt") as openfile:
-				for line in openfile:
-					for part in line.split():
-						if "1337" in part:
-							print part
-							serverStarted = True
-			openfile2.close()
+		with open("server.txt") as openfile:
+			while(not serverStarted):
+			
+					for line in openfile:
+						for part in line.split():
+							if "1337" in part:
+								print part
+								serverStarted = True
+			openfile.close()
 
 		self.speakery.say("Server is Up")
 
