@@ -73,15 +73,15 @@ class StartUp(object):
 		serverStarted = False
 		server = subprocess.Popen('sh start_node.sh > server.txt 2>&1', shell=True)
 		self.speakery.say("Starting server, please wait")
-		with open("server.txt") as openfile:
-			while(not serverStarted):
-					for line in openfile:
-						for part in line.split():
+		while(not serverStarted):
+			with open("server.txt") as openfile:
+				for line in openfile:
+					for part in line.split():
+						print part
+						if "1337" in part:
 							print part
-							if "1337" in part:
-								print part
-								serverStarted = True
-			openfile.close()
+							serverStarted = True
+				openfile.close()
 
 		self.speakery.say("Server is Up")
 
