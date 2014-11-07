@@ -75,9 +75,9 @@ class StartUp(object):
 		self.speakery.say("Starting server, please wait")
 		with open("server.txt") as openfile:
 			while(not serverStarted):
-			
 					for line in openfile:
 						for part in line.split():
+							print part
 							if "1337" in part:
 								print part
 								serverStarted = True
