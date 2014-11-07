@@ -1,6 +1,7 @@
 import subprocess
 import time
 import speaker
+import fileinput
 
 # #startup dispatcher
 # class StartUp(object):
@@ -60,12 +61,17 @@ class StartUp(object):
 			# 	self.speakery.say("restarting Server")
 			# 	self.server = self.startServer()
 
-			#check if there is a recv error in serial
-			# with open("serial.txt") as openfile2:
-			# 	for line in openfile2:
-			# 		if "error" in line:
-			# 			self.speakery.say("Serial Daemon has an recieve error, please press the reset Button on Arduino")
-			# 	openfile2.close()
+			# check if there is a recv error in serial
+			with open("serial.txt") as openfile2:
+				for line in openfile2:
+					if "error" in line:
+						self.speakery.say("Serial Daemon has an recieve error, please press the reset Button on Arduino")
+				
+			
+				for line in fileinput.input(openfile2, inplace=True):
+	    			if "error" in line:
+	        			continue
+	        	openfile2.close()
 
 			time.sleep(3)
 
@@ -104,7 +110,7 @@ class StartUp(object):
 		return voice
 
 	def startSerial(self):
-		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > serial.txt  | less' , shell=True)
+		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > serial.txt 2>&1 | less' , shell=True)
 		self.speakery.say("Started Serial")
 		return serial
 
