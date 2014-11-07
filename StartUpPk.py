@@ -55,6 +55,11 @@ class StartUp(object):
 				self.speakery.say("restarting Cruncher")
 				self.cruncher = self.startCruncher()
 
+			if(self.server.poll() != None): #process died
+				self.speakery.say("Server Went Down!")
+				self.speakery.say("restarting Server")
+				self.server = self.startServer()
+
 			#check if there is a recv error in serial
 			with open("serial.txt") as openfile2:
 				for line in openfile2:
