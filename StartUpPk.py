@@ -63,8 +63,8 @@ class StartUp(object):
 			#check if there is a recv error in serial
 			with open("serial.txt") as openfile2:
 				for line in openfile2:
-					if "error" in line.split():
-						mic.say("Serial Daemon has an recieve error, please press the reset Button on Arduino")
+					if "error" in line:
+						self.speakery.say("Serial Daemon has an recieve error, please press the reset Button on Arduino")
 				openfile2.close()
 
 			time.sleep(3)
