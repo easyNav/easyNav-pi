@@ -62,16 +62,16 @@ class StartUp(object):
 			# 	self.server = self.startServer()
 
 			# check if there is a recv error in serial
-			with open("serial.txt") as openfile2:
-				for line in openfile2:
-					if "error" in line:
-						self.speakery.say("Serial Daemon has an recieve error, please press the reset Button on Arduino")
+			# with open("serial.txt") as openfile2:
+			# 	for line in openfile2:
+			# 		if "error" in line:
+			# 			self.speakery.say("Serial Daemon has an recieve error, please press the reset Button on Arduino")
 				
 			
-				for line in fileinput.input(openfile2, inplace=True):
-					if "error" in line:
-						continue
-	        	openfile2.close()
+			# 	for line in fileinput.input(openfile2, inplace=True):
+			# 		if "error" in line:
+			# 			continue
+	  #       	openfile2.close()
 
 			time.sleep(3)
 
