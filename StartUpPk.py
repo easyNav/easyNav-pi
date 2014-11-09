@@ -2,15 +2,8 @@ import subprocess
 import time
 import speaker
 import fileinput
+import os
 
-# #startup dispatcher
-# class StartUp(object):
-# 	def __init__:
-		
-# 		self.dispatcher = subprocess.Popen('easyNav-pi-dispatcher > dispatcher.txt 2>&1', shell=True)
-# 		print "Started dispatcher"
-	
-# 		self.nav = 
 
 class StartUp(object):
 	def __init__(self):
@@ -22,6 +15,7 @@ class StartUp(object):
 		self.serial = ""
 		self.alert = ""
 		self.cruncher = ""
+		self.ctr = 0
 
 	def monitor(self):
 		while(1):
@@ -56,22 +50,17 @@ class StartUp(object):
 				self.speakery.say("restarting Cruncher")
 				self.cruncher = self.startCruncher()
 
-			# if(self.server.poll() != None): #process died
-			# 	self.speakery.say("Server Went Down!")
-			# 	self.speakery.say("restarting Server")
-			# 	self.server = self.startServer()
 
-			# check if there is a recv error in serial
-			# with open("serial.txt") as openfile2:
-			# 	for line in openfile2:
-			# 		if "error" in line:
-			# 			self.speakery.say("Serial Daemon has an recieve error, please press the reset Button on Arduino")
-				
-			
-			# 	for line in fileinput.input(openfile2, inplace=True):
-			# 		if "error" in line:
-			# 			continue
-	  #       	openfile2.close()
+			#check if there is a recv error in serial
+			with open("serial.txt") as openfile2:
+				for line in openfile2:
+					if "error" in line:
+						self.ctr++
+						self.speakery.say("Serial Daemon has an recieve error, restarting Serial Daemon")
+						if(self.ctr == 1):
+							self.ctr=0
+							os.system("sudo pkill -SIGTERM -f \"serialmod\"")
+							break
 
 			time.sleep(3)
 
@@ -105,12 +94,12 @@ class StartUp(object):
 		return nav
 
 	def startVoice(self):
-		voice = subprocess.Popen('sudo python /home/pi/repos/easyNav-IO/voice.py > voice.txt 2>&1 | less', shell=True)
+		voice = subprocess.Popen('sudo python /home/pi/repos/easyNav-IO/voice.py > /dev/null 2>&1 | less', shell=True)
 		self.speakery.say("Started Voice")
 		return voice
 
 	def startSerial(self):
-		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > /dev/null 2>&1 | less' , shell=True)
+		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > serial.txt 2>&1 | less' , shell=True)
 		self.speakery.say("Started Serial")
 		return serial
 
@@ -120,7 +109,7 @@ class StartUp(object):
 		return alert
 
 	def startCruncher(self):
-		cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gears2/Cruncher/cruncher.py pi > cruncher.txt 2>&1 | less', shell=True)
+		cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gears2/Cruncher/cruncher.py pi > /dev/null 2>&1 | less', shell=True)
 		self.speakery.say("Started cruncher")
 		return cruncher
 
