@@ -124,7 +124,7 @@ def runMain():
 
 	#recent inclusion, update map after server kicks in
 	startUp.updateMap();
-	time.sleep(5)
+	time.sleep(15)
 
 	startUp.dispatcher = startUp.startDispatcher()
 	time.sleep(8)
