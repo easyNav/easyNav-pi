@@ -115,7 +115,7 @@ class StartUp(object):
 		return cruncher
 
 	def updateMap(self):
-		subprocess.Popen("python /home/pi/repos/easyNav-pi-scripts/src/loadMaps.py > updateMap.txt 2>&1");
+		subprocess.Popen("python /home/pi/repos/easyNav-pi-scripts/src/loadMaps.py > updateMap.txt 2>&1" , shell=True);
 		self.speakery.say("Maps updated")
 
 def runMain():
