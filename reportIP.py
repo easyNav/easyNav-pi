@@ -1,4 +1,5 @@
 import requests
+import os
 
 os.system("ifconfig wlan0 | grep inet  > myIp.txt")
 os.system("iwconfig wlan0 | grep ESSID > myESSID.txt")
