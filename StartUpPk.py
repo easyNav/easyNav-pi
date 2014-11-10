@@ -72,7 +72,7 @@ class StartUp(object):
 			with open("server.txt") as openfile:
 				for line in openfile:
 					for part in line.split():
-						print part
+						#print part
 						if "1337" in part:
 							print part
 							serverStarted = True
