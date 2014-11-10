@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 
 os.system("ifconfig wlan0 | grep inet  > myIp.txt")
 os.system("iwconfig wlan0 | grep ESSID > myESSID.txt")
@@ -30,4 +31,5 @@ with open('myESSID.txt') as ESSIDTxt:
 
 
 payload={"ip":ipAddr, "essid": givenESSID}
-requests.post("http://54.169.105.67:8002", data=payload, timeout=2)
+r = requests.post("http://54.169.105.67:8002", data=payload, timeout=2)
+print r.json()
