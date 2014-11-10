@@ -55,7 +55,7 @@ class StartUp(object):
 			with open("serial.txt") as openfile2:
 				for line in openfile2:
 					if "error" in line:
-						self.ctr++
+						self.ctr+=1
 						self.speakery.say("Serial Daemon has an recieve error, restarting Serial Daemon")
 						if(self.ctr == 1):
 							self.ctr=0
@@ -94,7 +94,7 @@ class StartUp(object):
 		return nav
 
 	def startVoice(self):
-		voice = subprocess.Popen('sudo python /home/pi/repos/easyNav-IO/voice.py > /dev/null 2>&1 | less', shell=True)
+		voice = subprocess.Popen('sudo python /home/pi/repos/easyNav-IO/voice.py > voice.txt 2>&1 | less', shell=True)
 		self.speakery.say("Started Voice")
 		return voice
 
