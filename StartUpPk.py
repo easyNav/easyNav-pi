@@ -114,9 +114,18 @@ class StartUp(object):
 		self.speakery.say("Started cruncher")
 		return cruncher
 
+	def updateMap(self):
+		subprocess.Popen("python /home/pi/repos/easyNav-pi-scripts/src/loadMaps.py > updateMap.txt 2>&1");
+		self.speakery.say("Maps updated")
+
 def runMain():
 	startUp = StartUp()
 	startUp.server = startUp.startServer()
+
+	#recent inclusion, update map after server kicks in
+	startUp.updateMap();
+	time.sleep(5)
+
 	startUp.dispatcher = startUp.startDispatcher()
 	time.sleep(8)
 	startUp.nav = startUp.startNav()
