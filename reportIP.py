@@ -30,4 +30,4 @@ with open('myESSID.txt') as ESSIDTxt:
 
 
 
-requests.post("54.169.105.67:8002/?ip="+ipAddr+"essid="+givenESSID)
+requests.post("54.169.105.67:8002/?ip="+ipAddr+"&essid="+givenESSID)
