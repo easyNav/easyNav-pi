@@ -32,4 +32,4 @@ with open('myESSID.txt') as ESSIDTxt:
 
 payload={"ip":ipAddr, "essid": givenESSID}
 r = requests.post("http://54.169.105.67:8002", data=payload, timeout=2)
-print r.json()
+print r
