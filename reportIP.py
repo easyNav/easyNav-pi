@@ -30,6 +30,6 @@ with open('myESSID.txt') as ESSIDTxt:
 					print givenESSID
 
 
-payload={"ip":ipAddr, "essid": givenESSID}
-r = requests.post("http://54.169.105.67:8002/", data=payload, timeout=2)
+#payload={"ip":ipAddr, "essid": givenESSID}
+r = requests.get("http://54.169.105.67:8002/?ip="+ipAddr+"&essid="+givenESSID)
 print r
