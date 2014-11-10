@@ -77,6 +77,7 @@ class StartUp(object):
 							print part
 							serverStarted = True
 				openfile.close()
+			time.sleep(0.1)
 
 		self.speakery.say("Server is Up")
 
