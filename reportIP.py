@@ -33,5 +33,9 @@ with open('myESSID.txt') as ESSIDTxt:
 
 
 #payload={"ip":ipAddr, "essid": givenESSID}
-r = requests.get("http://54.169.105.67:8002/?ip="+ipAddr+"&essid="+givenESSID)
-print r
+
+try:
+	r = requests.get("http://54.169.105.67:8002/?ip="+ipAddr+"&essid="+givenESSID)
+	print r
+except: 
+	print "network error, cannot report ip"
