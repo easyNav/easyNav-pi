@@ -84,33 +84,33 @@ class StartUp(object):
 		return server
 
 	def startDispatcher(self):
-		dispatcher = subprocess.Popen('easyNav-pi-dispatcher > dispatcher.txt 2>&1 | less', shell=True)
+		dispatcher = subprocess.Popen('easyNav-pi-dispatcher > dispatcher.txt 2>&1', shell=True)
 		self.speakery.say("Started dispatcher")
 		return dispatcher
 
 	def startNav(self):
 		#startup Nav
-		nav = subprocess.Popen('easyNav-pi-nav > navigation.txt 2>&1 | less', shell=True)
+		nav = subprocess.Popen('easyNav-pi-nav > navigation.txt', shell=True)
 		self.speakery.say("Started Nav")
 		return nav
 
 	def startVoice(self):
-		voice = subprocess.Popen('sudo python /home/pi/repos/easyNav-IO/voice.py > voice.txt 2>&1 | less', shell=True)
+		voice = subprocess.Popen('sudo python /home/pi/repos/easyNav-IO/voice.py', shell=True)
 		self.speakery.say("Started Voice")
 		return voice
 
 	def startSerial(self):
-		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py > serial.txt 2>&1 | less' , shell=True)
+		serial = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/serialmod.py' , shell=True)
 		self.speakery.say("Started Serial")
 		return serial
 
 	def startAlert(self):
-		alert = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/alert.py > alert.txt 2>&1 | less', shell=True)
+		alert = subprocess.Popen('sudo python /home/pi/repos/easyNav-serial/sprotpy/alert.py', shell=True)
 		self.speakery.say("Started alert")
 		return alert
 
 	def startCruncher(self):
-		cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gears2/Cruncher/cruncher.py pi > /dev/null 2>&1 | less', shell=True)
+		cruncher = subprocess.Popen('sudo python /home/pi/repos/easyNav-gears2/Cruncher/cruncher.py pi', shell=True)
 		self.speakery.say("Started cruncher")
 		return cruncher
 
@@ -123,22 +123,22 @@ def runMain():
 	startUp.server = startUp.startServer()
 
 	#recent inclusion, update map after server kicks in
-	startUp.updateMap();
-	time.sleep(15)
+	# startUp.updateMap();
+	# time.sleep(15)
 
 	startUp.dispatcher = startUp.startDispatcher()
-	time.sleep(8)
+	time.sleep(3)
 	startUp.nav = startUp.startNav()
-	time.sleep(8)
+	time.sleep(3)
 	startUp.voice = startUp.startVoice()
-	time.sleep(8)
+	time.sleep(3)
 	startUp.serial = startUp.startSerial()
-	time.sleep(8)
+	time.sleep(3)
 	startUp.alert = startUp.startAlert()
-	time.sleep(8)
+	time.sleep(3)
 	startUp.cruncher = startUp.startCruncher()
-	time.sleep(8)
-	startUp.monitor()
+	time.sleep(3)
+	#startUp.monitor()
 
 if __name__ == '__main__':
 	runMain()
